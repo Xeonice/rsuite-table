@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import classNames from 'classnames';
 
-export const globalKey = 'rs-';
+export const globalKey = 'c7n-portfolio-';
 export const getClassNamePrefix = () => {
   if (typeof __RSUITE_CLASSNAME_PREFIX__ !== 'undefined') {
     return __RSUITE_CLASSNAME_PREFIX__;

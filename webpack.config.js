@@ -8,8 +8,7 @@ const { NODE_ENV } = process.env;
 
 
 const extractLess = new ExtractTextPlugin({
-  filename: '[name].[contenthash].css',
-  disable: NODE_ENV === 'development'
+  filename: '[name].[contenthash].css'
 });
 
 
@@ -29,7 +28,7 @@ const plugins = [
     inject: true,
     hash: true,
     path: docsPath
-  })
+  }),
 ]
 
 if (process.env.NODE_ENV === 'production') {
@@ -67,15 +66,17 @@ const common = {
       exclude: /node_modules/
     }, {
       test: /\.less$/,
-      loader: extractLess.extract({
-        use: [{
-          loader: 'css-loader'
-        }, {
-          loader: 'less-loader'
-        }],
-        // use style-loader in development
-        fallback: 'style-loader'
-      })
+      use: [
+        {
+          loader: 'style-loader',
+        },
+        {
+          loader: 'css-loader',
+        },
+        {
+          loader: 'less-loader',
+        },
+      ],
     }, {
       test: /\.md$/,
       use: [{
@@ -99,13 +100,13 @@ const common = {
 };
 
 module.exports = (env = {}) => {
-
   if (NODE_ENV === 'development') {
     return Object.assign({}, common, {
       entry: [
         'babel-polyfill',
         'react',
         'react-dom',
+        'less',
         'react-hot-loader/patch',
         'webpack-dev-server/client?http://127.0.0.1:3100',
         'webpack/hot/only-dev-server',

@@ -1,3 +1,4 @@
+@import 'variables';
 &-table {
   border: 1px solid @border-color;
   position: relative;
@@ -5,6 +6,9 @@
   &-column-resizing {
     cursor: ew-resize;
     .user-select();
+  }
+  &-column-notdisplay {
+    .notDisplay();
   }
 
   &-row {
@@ -78,6 +82,9 @@
     position: absolute;
     white-space: normal;
     background: @body-background;
+    &-hidden {
+      display: none;
+    }
     &.first {
       border-left-width: 0;
     }
